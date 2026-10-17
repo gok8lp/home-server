@@ -13,6 +13,28 @@ bots, tunnels and VMs (Turkish).*
 Ryzen 5 2600X, 15 GB RAM, GTX 1660 Ti (sanal makineye geçirilebilir), SSD + iki harici disk; Ubuntu 26.04,
 Docker, libvirt/KVM, Tailscale, Cloudflare Tunnel. Ayrıntılı anlık envanter: [`envanter/SUNUCU.md`](envanter/SUNUCU.md).
 
+## Belgeler
+
+Ayrıntılı anlatım [`belgeler/`](belgeler/) altında:
+
+| Belge | Konu |
+| --- | --- |
+| [Mimari](belgeler/MIMARI.md) | katmanlar, şema, veri akışları |
+| [Ağ ve erişim](belgeler/AG-VE-ERISIM.md) | ev ağı, Tailscale, iki Cloudflare tüneli, DNS, güvenlik duvarı, hangi servis nereden açılır |
+| [Depolama](belgeler/DEPOLAMA.md) | üç LUKS disk, bağlama noktaları, disk uyutma, ölüm öncesi disk koruma |
+| [Yedekleme](belgeler/YEDEKLEME.md) | gecelik kritik yedek, 30 günlük silinenler, geri yükleme |
+| [İzleme ve bildirim](belgeler/IZLEME-VE-BILDIRIM.md) | kendini onarma, Docker/disk/SSH izleme, yapay zekâ gözcü, raporlar, Telegram/WhatsApp/Gotify |
+| [Güvenlik](belgeler/GUVENLIK.md) | tehdit modeli, korumalar, bilinçli açıklar, depodaki temizlik |
+| [Sanal makineler](belgeler/SANAL-MAKINELER.md) | GPU geçirmeli Windows, mullvad-ts VPN + geliştirme masaüstü |
+| [Tarayıcıdan masaüstü](belgeler/UZAK-MASAUSTU.md) | Guacamole, Webtop, Kasm, tek oturum, boşta kaydet-kapat |
+| [Kurulum](belgeler/KURULUM.md) | sıfırdan yeniden kurulum sırası |
+| [Bakım](belgeler/BAKIM.md) | sık işler, bilinen tuzaklar |
+
+Dosyalardan her güncellemede yeniden üretilen tablolar ([`belgeler/otomatik/`](belgeler/otomatik/)):
+[Docker yığınları](belgeler/otomatik/YIGINLAR.md) (imaj, port, erişim yolu, bellek, bağlı klasörler) ·
+[servisler ve zamanlayıcılar](belgeler/otomatik/SERVISLER.md) · [betikler](belgeler/otomatik/BETIKLER.md) ·
+[sanal makineler](belgeler/otomatik/SANAL-MAKINELER.md) · [tünel adresleri](belgeler/otomatik/TUNEL.md).
+
 ## Klasörler
 
 | Klasör | İçerik |
@@ -45,5 +67,5 @@ Docker, libvirt/KVM, Tailscale, Cloudflare Tunnel. Ayrıntılı anlık envanter:
 ./guncelle.sh "açıklama"
 ```
 
-`topla.sh` sunucudan toplar ve `temizle.py` ile temizler (kişisel değerler depo dışındaki yerel listede);
+`topla.sh` sunucudan toplar, `temizle.py` ile temizler, `belgele.py` ile otomatik belgeleri üretir (kişisel değerler depo dışındaki yerel listede);
 `guncelle.sh` gizli bilgi taraması yapar, bulursa göndermez.

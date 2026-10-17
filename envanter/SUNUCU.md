@@ -1,6 +1,6 @@
 # Sunucu envanteri
 
-Toplandı: 2026-10-17 13:27
+Toplandı: 2026-10-17 13:33
 
 ## Sistem
 ```
@@ -21,7 +21,7 @@ Chassis Asset Tag: To be filled by O.E.M.
 CPU(s):                                  12
 Model name:                              AMD Ryzen 5 2600X Six-Core Processor
                total        used        free      shared  buff/cache   available
-Mem:            15Gi        11Gi       332Mi       1.3Gi       5.2Gi       3.9Gi
+Mem:            15Gi       7.5Gi       1.3Gi       562Mi       7.2Gi       7.6Gi
 ```
 
 ## Diskler
@@ -40,7 +40,7 @@ sdc                         465.8G disk  crypto_LUKS
 
 Filesystem                         Size  Used Avail Use% Mounted on
 efivarfs                           128K   48K   76K  39% /sys/firmware/efi/efivars
-/dev/mapper/ubuntu--vg-ubuntu--lv  437G  245G  174G  59% /
+/dev/mapper/ubuntu--vg-ubuntu--lv  437G  245G  173G  59% /
 /dev/sdb2                          2.0G  247M  1.6G  14% /boot
 /dev/sdb1                          1.1G  6.4M  1.1G   1% /boot/efi
 /dev/mapper/sdc_crypt              458G  256G  180G  59% /mnt/side

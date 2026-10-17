@@ -39,6 +39,19 @@ ssh flugelserver 'echo "# Sunucu envanteri"; echo; echo "Toplandı: $(date "+%F 
  echo; echo "## Zamanlayıcılar"; echo "\`\`\`"; systemctl list-timers --all --no-legend | awk "{print \$NF, \$(NF-1)}" | grep -v "^$" | sort -u | head -60; echo "\`\`\`"; \
  echo; echo "## Elle kurulan paketler"; echo "\`\`\`"; apt-mark showmanual | tr "\n" " " | fold -s -w 110; echo; echo "\`\`\`"' > "$S/envanter/SUNUCU.md"
 
+# ana tünel (Cloudflare panelinden yönetilir): son yapılandırma günlükten okunur
+ssh flugelserver 'sudo journalctl -u cloudflared --no-pager -o cat | grep -i "new configuration" | tail -1' | python3 -c "
+import sys, json, re
+s = sys.stdin.read(); m = re.search(r'config=\"(.*)\"\s', s) or re.search(r'config=(\{.*\})', s)
+t = (m.group(1) if m else '{}').replace('\\\\\"', '\"').replace('\\\"', '\"')
+try: d = json.loads(t)
+except Exception: d = {}
+print('# Ana tünel (homeserver) giriş kuralları — Cloudflare panelinden yönetilir; sunucu günlüğünden alındı.')
+print('ingress:')
+for k in d.get('ingress', []):
+    print('  - hostname: ' + str(k.get('hostname', '')) + chr(10) + '    service: ' + str(k.get('service', '')) + ('' if not (k.get('originRequest') or {}).get('access') else chr(10) + '    # Cloudflare Access korumalı'))
+" > "$S/ana-tunel.yml" || true
+
 # mullvad-ts sanal makinesi
 mkdir -p "$S/vm"
 ssh flugelserver '~/sistem-bakim/vmroot.sh "cd / && tar czf - usr/local/bin/flugel-bosta.sh usr/local/bin/flugel-tek-oturum.sh etc/systemd/system/flugel-bosta.service etc/systemd/system/flugel-bosta.timer etc/systemd/system/flugel-ekran.service etc/systemd/system/systemd-networkd-wait-online.service.d etc/netplan etc/cloud/cloud.cfg.d/99-flugel-ag.cfg etc/xrdp/xrdp.ini etc/lightdm/lightdm.conf.d etc/polkit-1/rules.d/45-flugel-xrdp.rules etc/pam.d/xrdp-sesman etc/pam.d/lightdm etc/dconf/db/local.d etc/dconf/profile/user root/xfce-ubuntu.py root/xfce-duzelt.py root/sade.sh root/gnome-kur.sh 2>/dev/null | base64 -w0"' | base64 -d | tar xzf - -C "$S/vm" 2>/dev/null || true
@@ -52,7 +65,7 @@ mv "$R/yiginlar/docker-compose.yml" "$R/yiginlar/_ana-docker-compose.yml"
 cp "$S"/opt/basket-bot/* "$R/basket-bot/"; cp -r "$S"/opt/scripts/. "$R/scripts/"
 cp "$S"/etc/systemd/system/* "$R/systemd/"; cp "$S"/usr/local/bin/* "$R/bin/"; cp "$S"/usr/local/sbin/* "$R/sbin/"
 cp -r "$S"/usr/local/lib/sistem-bakim/. "$R/lib/"; cp "$S"/home/flugel/sistem-bakim/* "$R/bakim/"
-cp "$S"/etc/cloudflared/*.yml "$R/cloudflared/"; cp "$S"/etc/libvirt/hooks/qemu "$R/libvirt/qemu-hook"
+cp "$S"/etc/cloudflared/*.yml "$R/cloudflared/"; cp "$S/ana-tunel.yml" "$R/cloudflared/ana-tunel.yml" 2>/dev/null || true; cp "$S"/etc/libvirt/hooks/qemu "$R/libvirt/qemu-hook"
 cp "$S"/etc/libvirt/qemu/*.xml "$R/libvirt/vm/"; cp "$S"/etc/libvirt/qemu/networks/default.xml "$R/libvirt/ag-default.xml"
 cp -r "$S"/vm/. "$R/vm/mullvad-ts/" 2>/dev/null || true; cp "$S"/envanter/* "$R/envanter/"
 
@@ -60,4 +73,5 @@ cp -r "$S"/vm/. "$R/vm/mullvad-ts/" 2>/dev/null || true; cp "$S"/envanter/* "$R/
 python3 "$R/temizle.py" "$R" "$GIZLI"; mv "$R/.env.ornek" "$R/env.ornek"
 sed -i 's/>[^<]*<\/h1>/>FLUGEL<\/h1>/; s/<title>[^<]*<\/title>/<title>FLUGEL<\/title>/' "$R/yiginlar/giris/html/index.html"
 sed -i -E 's/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/<kimlik>/g' "$R"/cloudflared/*.yml
+python3 "$R/belgele.py"
 echo "toplandı: $(find "$R" -type f -not -path "*/.git/*" | wc -l) dosya"
