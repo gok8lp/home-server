@@ -1,0 +1,6 @@
+polkit.addRule(function(action, subject) {
+  if ((action.id.indexOf("org.freedesktop.color-manager.") == 0 ||
+       action.id == "org.freedesktop.packagekit.system-sources-refresh") && subject.user == "hello") {
+    return polkit.Result.YES;
+  }
+});

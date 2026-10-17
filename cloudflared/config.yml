@@ -1,0 +1,27 @@
+tunnel: <kimlik>
+credentials-file: /root/.cloudflared/<kimlik>.json
+
+ingress:
+  - hostname: nextcloud.<alan-adı>
+    service: https://localhost:8443
+    originRequest:
+      noTLSVerify: true
+  - hostname: immich.<alan-adı>
+    service: http://localhost:2283
+  - hostname: plex.<alan-adı>
+    service: http://localhost:32400
+  - hostname: code.<alan-adı>
+    service: http://localhost:8444
+  - hostname: ai.<alan-adı>
+    service: http://localhost:3030
+  - hostname: status.<alan-adı>
+    service: http://localhost:3004
+  - hostname: files.<alan-adı>
+    service: http://localhost:8085
+  - hostname: tools.<alan-adı>
+    service: http://localhost:8233
+  - hostname: pdf.<alan-adı>
+    service: http://localhost:8095
+  - hostname: adguard.<alan-adı>
+    service: http://localhost:8888
+  - service: http_status:404

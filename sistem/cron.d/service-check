@@ -1,0 +1,1 @@
+@reboot root sleep 60 && systemctl restart docker mullvad-daemon

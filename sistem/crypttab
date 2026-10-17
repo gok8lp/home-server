@@ -1,0 +1,3 @@
+dm_crypt-0 UUID=3f9f2c05-f5c2-47ff-99fe-3da36944e6f9 none luks,tpm2-device=auto
+sdc_crypt UUID=8a750c21-3ebd-45dc-af3c-73888d943043 /etc/cryptsetup-keys.d/sdc_crypt.key luks,nofail
+sdd_crypt UUID=7a9b2e0a-8d9d-43f7-931b-2c594e98e968 /etc/cryptsetup-keys.d/sdd_crypt.key luks,nofail

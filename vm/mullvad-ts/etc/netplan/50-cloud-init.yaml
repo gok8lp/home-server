@@ -1,0 +1,11 @@
+network:
+  version: 2
+  ethernets:
+    enp1s0:
+      dhcp4: false
+      addresses: [<IP>/24]
+      routes:
+        - to: default
+          via: <IP>
+      nameservers:
+        addresses: [<IP>]

@@ -1,0 +1,22 @@
+<!--
+WARNING: THIS IS AN AUTO-GENERATED FILE. CHANGES TO IT ARE LIKELY TO BE
+OVERWRITTEN AND LOST. Changes to this xml configuration should be made using:
+  virsh net-edit default
+or other application using the libvirt API.
+-->
+
+<network>
+  <name>default</name>
+  <uuid>2f7368e1-da30-4c48-a004-8822a7b81562</uuid>
+  <forward mode='nat'/>
+  <bridge name='virbr0' stp='on' delay='0'/>
+  <mac address='<IPv6>'/>
+  <ip address='<IP>' netmask='255.255.255.0'>
+    <dhcp>
+      <range start='<IP>' end='<IP>'/>
+      <host mac='<IPv6>' name='w11-gpu' ip='<IP>'/>
+      <host mac='<IPv6>' name='w11' ip='<IP>'/>
+      <host mac='<IPv6>' name='mullvad-ts' ip='<IP>'/>
+    </dhcp>
+  </ip>
+</network>

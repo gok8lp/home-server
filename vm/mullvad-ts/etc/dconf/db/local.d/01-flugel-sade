@@ -1,0 +1,31 @@
+[org/gnome/desktop/interface]
+enable-animations=false
+enable-hot-corners=false
+show-battery-percentage=false
+[org/gnome/desktop/background]
+picture-uri=''
+picture-uri-dark=''
+picture-options='none'
+primary-color='#1e1e22'
+color-shading-type='solid'
+[org/gnome/desktop/screensaver]
+picture-uri=''
+[org/gnome/shell]
+disabled-extensions=['<e-posta>', '<e-posta>', '<e-posta>']
+[org/gnome/desktop/search-providers]
+disable-external=true
+[org/gnome/desktop/privacy]
+remember-recent-files=false
+report-technical-problems=false
+send-software-usage-stats=false
+[org/gnome/software]
+download-updates=false
+allow-updates=false
+[org/freedesktop/tracker/miner/files]
+index-recursive-directories=@as []
+index-single-directories=@as []
+enable-monitors=false
+[org/gnome/desktop/notifications]
+show-in-lock-screen=false
+[org/gnome/mutter]
+experimental-features=@as []
