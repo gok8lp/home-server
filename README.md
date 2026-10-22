@@ -1,6 +1,11 @@
-# home-server
+# Home Server
 
-Kişisel ev sunucumun (flugelserver) tüm yapısı: sistem ayarları, Docker yığınları, servisler, betikler, botlar,
+Bu depo Docker/systemd yapılandırmalarını incelemek ve kendi sunucuna uyarlamak içindir.
+Hazır hesaplar, uygulama verileri veya tek komutla çalışan genel kurulum sunmaz.
+Masaüstü entegrasyonları [desktop-server-toolkit](https://github.com/gok8lp/desktop-server-toolkit),
+Android istemcisi [home-server-android](https://github.com/gok8lp/home-server-android) içindedir.
+
+Kişisel ev sunucumun yapılandırma örnekleri: sistem ayarları, Docker yığınları, servisler, betikler, botlar,
 Cloudflare tünelleri ve sanal makineler. *My home server as code: system config, Docker stacks, services, scripts,
 bots, tunnels and VMs (Turkish).*
 
@@ -41,7 +46,7 @@ Dosyalardan her güncellemede yeniden üretilen tablolar ([`belgeler/otomatik/`]
 | --- | --- |
 | `sistem/` | `/etc` ayarları: ağ (netplan), diskler (fstab, crypttab, udev, hd-idle), Samba, smartd, Docker daemon, SSH, ufw, GRUB/VFIO, sysctl, cron, logind/journald, Apache |
 | `yiginlar/` | Docker yığınları (compose + yapılandırma): adguard ai-sandbox anahtar bazarr code-server convertx daedalos filebrowser flaresolverr giris gluetun gotify guacamole immich_server it-tools jackett kamiyomu kasm kavita komga libreoffice lingarr n8n netdata nextcloud openbooks prowlarr radarr sonarr stirling-pdf subgen tapmap tranga-api transmission2 uptime-kuma webtop  |
-| `panel/` | Homepage paneli, FLUGEL Akış (kişisel haber/oyun/anime akışı), gündem botu |
+| `panel/` | Homepage paneli, Akış (kişisel haber/oyun/anime akışı), gündem botu |
 | `basket-bot/` | basketbol hakem görev botu, anime takip, IMDb puanı |
 | `systemd/` | sunucuya özel servis/zamanlayıcı/yol birimleri (izleme, yedek, güvenlik duvarı, Island verisi, Webtop/Kasm seçimi…) |
 | `bin/`, `sbin/`, `lib/` | bildirim (Telegram/WhatsApp/Gotify), sabah raporu, disk sağlığı, kendini onarma, kritik yedek, virüs tarama, torrent bekçisi |
@@ -69,3 +74,7 @@ Dosyalardan her güncellemede yeniden üretilen tablolar ([`belgeler/otomatik/`]
 
 `topla.sh` sunucudan toplar, `temizle.py` ile temizler, `belgele.py` ile otomatik belgeleri üretir (kişisel değerler depo dışındaki yerel listede);
 `guncelle.sh` gizli bilgi taraması yapar, bulursa göndermez.
+
+## Başka bir bilgisayarda kullanım
+
+Önce `belgeler/MIMARI.md` ve `belgeler/KURULUM.md` oku. Yolları, diskleri, alan adlarını ve izinleri kendi ortamına göre düzenle. `topla.sh` ve `guncelle.sh` bakımcının sisteminden veri toplama/yayınlama araçlarıdır; genel kurulum komutu değildir.
